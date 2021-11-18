@@ -220,3 +220,8 @@ TURN_11 = "turn-11"
 # pack names
 PACK_NAME_STANDARD = "StandardPack"
 PACK_NAME_EXPANSION = "ExpansionPack1"
+
+# error constants
+ERROR_STILL_ALIVE = "Can't use ability: Pet still alive"
+ERROR_NOT_ALIVE = "Can't use ability: Pet not alive"
+ERROR_ALL_FRIENDS_DEAD = "Can't use ability: All Friends dead"

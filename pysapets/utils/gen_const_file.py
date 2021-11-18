@@ -3,7 +3,7 @@
 import json
 import re
 
-with open("animal_list.json", "r") as json_file:
+with open("./animal_list.json", "r") as json_file:
   json_data = json.load(json_file)
 
 # function to convert camel case to snake case
@@ -15,7 +15,7 @@ def dash_to_snake_ignore_first(name):
   camel = name.replace('-', '_').upper()
   return '_'.join(x for x in camel.split('_')[1:]) 
 
-with open("../constants.py", "w") as const_file:
+with open("./../constants.py", "w") as const_file:
   # get the unique list of animal names
   for animal, obj in json_data["pets"].items():
     if "StandardPack" in obj["packs"] and obj["tier"] != "Summoned":
@@ -181,3 +181,9 @@ with open("../constants.py", "w") as const_file:
   const_file.write("\n# pack names\n")
   const_file.write("PACK_NAME_STANDARD = \"StandardPack\"\n")
   const_file.write("PACK_NAME_EXPANSION = \"ExpansionPack1\"\n")
+
+  # error constants
+  const_file.write("\n# error constants\n")
+  const_file.write("ERROR_STILL_ALIVE = \"Can't use ability: Pet still alive\"\n")
+  const_file.write("ERROR_NOT_ALIVE = \"Can't use ability: Pet not alive\"\n")
+  const_file.write("ERROR_ALL_FRIENDS_DEAD = \"Can't use ability: All Friends dead\"\n")

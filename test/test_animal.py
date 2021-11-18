@@ -1,8 +1,8 @@
 import unittest
 
 # Import the class Animal from the animal.py file
-from pysap.animal import Animal
-from pysap.constants import MELON_ARMOR, POISON_ATTACK
+from pysapets.animal import Animal
+from pysapets.constants import MELON_ARMOR, POISON_ATTACK
 
 # Create a class called AnimalTest that inherits from the unittest.TestCase class
 class AnimalTest(unittest.TestCase):
@@ -37,6 +37,10 @@ class AnimalTest(unittest.TestCase):
   #test get_tier
   def test_animal_get_tier(self):
     self.assertEqual(self.animal.tier, 1)
+
+  # test print(animal)
+  def test_animal_print(self):
+    self.assertEqual(str(self.animal), 'Animal: level 1, attack 2, health 2, exp 0')
 
   # test add_experience
   def test_animal_add_experience(self):
@@ -129,6 +133,10 @@ class AnimalTest(unittest.TestCase):
   def test_animal_dead(self):
     self.animal.subtract_health(2)
     self.assertTrue(self.animal.dead)
+  
+  # test get animal type
+  def test_animal_get_type(self):
+    self.assertEqual(self.animal.get_type(), 'Animal')
 
 # Run the tests
 if __name__ == '__main__':

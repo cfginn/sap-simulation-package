@@ -2,26 +2,47 @@ class Animal:
   # define ability class
   class Ability:
     # constructor
-    def __init__(self, trigger, triggeredBy, triggeredByN, effectFunction):
+    def __init__(self, animal, trigger, triggeredBy, effectFunction, triggeredByN = None):
+      self.animal = animal
       self.trigger = trigger
       self.triggeredBy = triggeredBy
       self.triggeredByN = triggeredByN
       self.effectFunction = effectFunction
 
+    # get ability trigger
+    def get_trigger(self):
+      return self.trigger
+    
+    # get ability triggeredBy
+    def get_triggeredBy(self):
+      return self.triggeredBy
+    
+    # get ability triggeredByN
+    def get_triggeredByN(self):
+      return self.triggeredByN
+    
+    # get ability effectFunction
+    def get_effectFunction(self):
+      return self.effectFunction
+
 
 #******************************************************************************** 
   # animal class
   # init health and attack  
-  def __init__(self, baseAttack, baseHealth, animalType = None, tier = 1, status = None, ability = None):
+  def __init__(self, baseAttack, baseHealth, animalType = "Animal", tier = 1, status = None, ability = None):
     self.health = baseHealth
     self.attack = baseAttack
-    self.type = animalType
+    self.animalType = animalType
     self.dead = False
     self.level = 1
     self.experience = 0
     self.tier = tier
     self.status = status
     self.ability = ability
+  
+  # define __str__
+  def __str__(self):
+    return "{}: level {}, attack {}, health {}, exp {}".format(self.animalType, self.level, self.attack, self.health, self.experience)
     
   # get the health of the animal
   def get_health(self):
@@ -30,9 +51,9 @@ class Animal:
   # get the attack of the animal
   def get_attack(self):
     return self.attack
-  # get the type of the animal
+  # get the animalType of the animal
   def get_type(self):
-    return self.type
+    return self.animalType
 
   # get whether the animal is dead
   def is_dead(self):
@@ -90,3 +111,24 @@ class Animal:
   # remove status from the animal
   def remove_status(self):
     self.status = None
+
+  # run ability
+  def run_ability(self, *args):
+    self.ability.effectFunction(self, *args)
+  
+  # get ability trigger
+  def get_ability_trigger(self):
+    return self.ability.get_trigger()
+  
+  # get ability triggeredBy
+  def get_ability_triggeredBy(self):
+    return self.ability.get_triggeredBy()
+
+  # get ability triggeredByN
+  def get_ability_triggeredByN(self):
+    return self.ability.get_triggeredByN()
+  
+  # get ability effectFunction
+  def get_ability_effectFunction(self):
+    return self.ability.get_effectFunction()
+  
