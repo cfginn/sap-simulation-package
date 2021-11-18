@@ -12,9 +12,10 @@ class Animal:
 #******************************************************************************** 
   # animal class
   # init health and attack  
-  def __init__(self, baseHealth, baseAttack, tier = 1, status = None, ability = None):
+  def __init__(self, baseAttack, baseHealth, animalType = None, tier = 1, status = None, ability = None):
     self.health = baseHealth
     self.attack = baseAttack
+    self.type = animalType
     self.dead = False
     self.level = 1
     self.experience = 0
@@ -29,6 +30,9 @@ class Animal:
   # get the attack of the animal
   def get_attack(self):
     return self.attack
+  # get the type of the animal
+  def get_type(self):
+    return self.type
 
   # get whether the animal is dead
   def is_dead(self):
