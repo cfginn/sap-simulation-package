@@ -56,12 +56,15 @@ LEOPARD = "pet-leopard"
 MAMMOTH = "pet-mammoth"
 SNAKE = "pet-snake"
 TIGER = "pet-tiger"
+
+# summoned only pets
 ZOMBIE_CRICKET = "pet-zombie-cricket"
 BUS = "pet-bus"
 ZOMBIE_FLY = "pet-zombie-fly"
 DIRTY_RAT = "pet-dirty-rat"
 CHICK = "pet-chick"
 RAM = "pet-ram"
+BUTTERFLY = "pet-butterfly"
 BEE = "pet-bee"
 
 # expansion pets

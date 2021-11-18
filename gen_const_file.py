@@ -18,7 +18,14 @@ def dash_to_snake_ignore_first(name):
 with open("constants.py", "w") as const_file:
   # get the unique list of animal names
   for animal, obj in json_data["pets"].items():
-    if "StandardPack" in obj["packs"]:
+    if "StandardPack" in obj["packs"] and obj["tier"] != "Summoned":
+      const_file.write("{} = \"{}\"\n".format(dash_to_snake_ignore_first(animal), animal))
+  
+  # seperate the summoned tier pets
+  const_file.write("\n# summoned only pets\n")
+
+  for animal, obj in json_data["pets"].items():
+    if obj["tier"] == "Summoned":
       const_file.write("{} = \"{}\"\n".format(dash_to_snake_ignore_first(animal), animal))
 
   # get the animal names specific to the expansion pack 
