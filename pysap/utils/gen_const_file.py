@@ -15,7 +15,7 @@ def dash_to_snake_ignore_first(name):
   camel = name.replace('-', '_').upper()
   return '_'.join(x for x in camel.split('_')[1:]) 
 
-with open("constants.py", "w") as const_file:
+with open("../constants.py", "w") as const_file:
   # get the unique list of animal names
   for animal, obj in json_data["pets"].items():
     if "StandardPack" in obj["packs"] and obj["tier"] != "Summoned":
@@ -89,6 +89,25 @@ with open("constants.py", "w") as const_file:
   for triggerBy in triggerBys:
     const_file.write("{} = \"{}\"\n".format(camel_to_snake(triggerBy), triggerBy))
 
+  triggerBys = []
+  for animal, obj in json_data["pets"].items():
+    if "level1Ability" in obj and obj["level1Ability"]["triggeredBy"] not in triggerBys:
+      triggerBys.append(obj["level1Ability"]["triggeredBy"])
+    if "level2Ability" in obj and obj["level2Ability"]["triggeredBy"] not in triggerBys:
+      triggerBys.append(obj["level1Ability"]["triggeredBy"])
+    if "level3Ability" in obj and obj["level3Ability"]["triggeredBy"] not in triggerBys:
+      triggerBys.append(obj["level1Ability"]["triggeredBy"])
+  
+  for foods, obj in json_data["foods"].items():
+    if "ability" in obj and obj["ability"]["triggeredBy"] not in triggerBys:
+      triggerBys.append(obj["ability"]["triggeredBy"])
+
+  for status, obj in json_data["statuses"].items():
+    if "ability" in obj and obj["ability"]["triggeredBy"] not in triggerBys:
+      triggerBys.append(obj["ability"]["triggeredBy"])
+  
+  for triggerBy in triggerBys:
+    print(triggerBy)
   # get the unique ability effect kinds
 
   effectKinds = []
