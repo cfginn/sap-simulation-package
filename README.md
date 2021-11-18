@@ -1,5 +1,5 @@
-# sap-simulation-for-genetic-alg
+# sap-simulation-package
 
-Just a side project to see if a genetic algorithm can learn to play super auto pets
+Creating a python package to simulate games of super auto pets
 
-Currently working on a framework to simulate games since running the algorithm on the actual game will be too slow and unfeasible.
+Using this to practice TDD, developing and distributing a python package to pypi, and eventually developing a bot for the game
