@@ -114,21 +114,25 @@ class Animal:
 
   # run ability
   def run_ability(self, *args):
-    self.ability.effectFunction(self, *args)
+    if self.ability:
+      self.ability.effectFunction(self, *args)
   
   # get ability trigger
   def get_ability_trigger(self):
-    return self.ability.get_trigger()
+    if self.ability:
+      return self.ability.get_trigger()
   
   # get ability triggeredBy
   def get_ability_triggeredBy(self):
-    return self.ability.get_triggeredBy()
+    if self.ability:
+      return self.ability.get_triggeredBy()
 
   # get ability triggeredByN
   def get_ability_triggeredByN(self):
-    return self.ability.get_triggeredByN()
-  
+    if self.ability:
+      return self.ability.get_triggeredByN()
+
   # get ability effectFunction
   def get_ability_effectFunction(self):
-    return self.ability.get_effectFunction()
-  
+    if self.ability:
+      return self.ability.get_effectFunction()
