@@ -2,6 +2,7 @@
 from pysapets.animal import Animal
 import pysapets.constants as constants
 import random
+import logging
 
 class Squirrel(Animal):
   # base health and attack values

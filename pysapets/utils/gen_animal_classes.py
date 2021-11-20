@@ -103,6 +103,7 @@ class {capitalized_animal}Test(unittest.TestCase):
 from pysapets.animal import Animal
 import pysapets.constants as constants
 import random
+import logging
 
 class {capitalized_animal}(Animal):
   # base health and attack values

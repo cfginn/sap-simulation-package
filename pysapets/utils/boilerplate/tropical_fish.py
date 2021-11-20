@@ -2,6 +2,7 @@
 from pysapets.animal import Animal
 import pysapets.constants as constants
 import random
+import logging
 
 class Tropical_fish(Animal):
   # base health and attack values
