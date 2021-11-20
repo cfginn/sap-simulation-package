@@ -12,9 +12,11 @@ class Mosquito(Animal):
     # lvl 1: Start of battle: Deal 1 damage to a random enemy
     # lvl 2: Start of battle: Deal 2 damage to a random enemy
     # lvl 3: Start of battle: Deal 3 damage to a random enemy
-    def _run_effect(self, friends):
-      pass
-    
+    def _run_effect(self, enemies):
+      # choose a random enemy
+      enemy = random.choice(enemies)
+      # deal damage to the enemy
+      enemy.subtract_health(self.level) 
     # create ability
     self.ability = Animal.Ability(self, constants.START_OF_BATTLE, constants.PLAYER, _run_effect)
 

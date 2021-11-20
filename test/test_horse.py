@@ -12,6 +12,7 @@ class HorseTest(unittest.TestCase):
   def setUp(self):
     self.horse = Horse()
     self.friends = [self.horse, Animal(2, 2), Animal(2, 2), Animal(2, 2), Animal(2, 2)]
+    self.summoned = Animal(2, 2)
   
   # test that get_type returns the correct type
   def test_get_type(self):
@@ -41,6 +42,14 @@ class HorseTest(unittest.TestCase):
     self.assertEqual(newHorse.get_health(), 1 + 3)
     self.assertEqual(newHorse.get_attack(), 1 + 3)
   
+  # test that ability can not be run if horse is dead
+  def test_run_ability_dead(self):
+    copyOfSummoned = deepcopy(self.summoned)
+    self.horse.subtract_health(self.horse.get_health())
+    self.horse.run_ability(self.summoned)
+
+    self.assertEqual(copyOfSummoned.get_attack(), self.summoned.get_attack())
+  
   # test that horse ability has correct trigger
   def test_get_ability_trigger(self):
     self.assertEqual(self.horse.get_ability_trigger(), constants.SUMMONED)
@@ -48,20 +57,25 @@ class HorseTest(unittest.TestCase):
   # test that horse ability has correct triggeredBy
   def test_get_ability_triggeredBy(self):
     self.assertEqual(self.horse.get_ability_triggeredBy(), constants.EACH_FRIEND)
-  
-  # TODO add relevant tests for horse ability
-
-  def test_run_ability(self):
-    pass
 
   def test_run_ability_level_1(self):
-    pass
+    copyOfSummoned = deepcopy(self.summoned)
+    self.horse.run_ability(self.summoned)
+
+    self.assertEqual(self.summoned.get_attack(), copyOfSummoned.get_attack() + 1)
 
   def test_run_ability_level_2(self):
-    pass
+    copyOfSummoned = deepcopy(self.summoned)
+    self.horse.level = 2
+    self.horse.run_ability(self.summoned)
+
+    self.assertEqual(self.summoned.get_attack(), copyOfSummoned.get_attack() + 2)
   
   def test_run_ability_level_3(self):
-    pass
-    
+    copyOfSummoned = deepcopy(self.summoned)
+    self.horse.level = 3
+    self.horse.run_ability(self.summoned)
+
+    self.assertEqual(self.summoned.get_attack(), copyOfSummoned.get_attack() + 3)
     
       

@@ -1,7 +1,9 @@
 
 from pysapets.animal import Animal
+from pysapets.zombie_cricket import ZombieCricket
 import pysapets.constants as constants
 import random
+import logging
 
 class Cricket(Animal):
   # base health and attack values
@@ -13,8 +15,16 @@ class Cricket(Animal):
     # lvl 2: Faint: Summon a 2/2 Cricket
     # lvl 3: Faint: Summon a 3/3 Cricket
     def _run_effect(self, friends):
-      pass
-    
+      # if cricket still alive do nothing
+      if not self.dead:
+        logging.error("{}: {}".format("Cricket", constants.ERROR_STILL_ALIVE))
+        return
+
+      zombieCricket = ZombieCricket(self)
+
+      # replace cricket with zombie in friends in place
+      friends[:] = [zombieCricket if friend == self else friend for friend in friends]
+ 
     # create ability
     self.ability = Animal.Ability(self, constants.FAINT, constants.SELF, _run_effect)
 

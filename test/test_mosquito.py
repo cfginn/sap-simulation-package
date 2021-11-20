@@ -11,7 +11,7 @@ class MosquitoTest(unittest.TestCase):
 
   def setUp(self):
     self.mosquito = Mosquito()
-    self.friends = [self.mosquito, Animal(2, 2), Animal(2, 2), Animal(2, 2), Animal(2, 2)]
+    self.enemies = [Animal(3, 3), Animal(3, 3), Animal(3, 3), Animal(3, 3), Animal(3, 3)]
   
   # test that get_type returns the correct type
   def test_get_type(self):
@@ -50,18 +50,56 @@ class MosquitoTest(unittest.TestCase):
     self.assertEqual(self.mosquito.get_ability_triggeredBy(), constants.PLAYER)
   
   # TODO add relevant tests for mosquito ability
-
+  # test that mosquito only hurts one enemy
   def test_run_ability(self):
-    pass
+    copyEnemies = deepcopy(self.enemies)
+    self.mosquito.run_ability(self.enemies)
+    
+    enemyHurtFlag = False
+    onlyOneEnemyHurtFlag = True
+    for enemy, enemyCopy in zip(self.enemies, copyEnemies):
+      if (enemy.get_health() < enemyCopy.get_health()):
+        if enemyHurtFlag:
+          onlyOneEnemyHurtFlag = False
+        enemyHurtFlag = True
+
+    self.assertTrue(onlyOneEnemyHurtFlag)
+    self.assertTrue(enemyHurtFlag)
 
   def test_run_ability_level_1(self):
-    pass
+    copyEnemies = deepcopy(self.enemies)
+    self.mosquito.run_ability(self.enemies)
+
+    test = False
+    for enemy, enemyCopy in zip(self.enemies, copyEnemies):
+      if enemy.get_health() == enemyCopy.get_health() - 1:
+        test = True
+    
+    self.assertTrue(test)
 
   def test_run_ability_level_2(self):
-    pass
+    copyEnemies = deepcopy(self.enemies)
+    self.mosquito.level = 2
+    self.mosquito.run_ability(self.enemies)
+
+    test = False
+    for enemy, enemyCopy in zip(self.enemies, copyEnemies):
+      if enemy.get_health() == enemyCopy.get_health() - 2:
+        test = True
+    
+    self.assertTrue(test)
+
   
   def test_run_ability_level_3(self):
-    pass
-    
+    copyEnemies = deepcopy(self.enemies)
+    self.mosquito.level = 3
+    self.mosquito.run_ability(self.enemies)
+
+    test = False
+    for enemy, enemyCopy in zip(self.enemies, copyEnemies):
+      if enemy.get_health() == enemyCopy.get_health() - 3:
+        test = True
+
+    self.assertTrue(test)
     
       
