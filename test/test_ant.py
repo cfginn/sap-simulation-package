@@ -51,19 +51,16 @@ class AntTest(unittest.TestCase):
   def test_get_ability_triggeredBy(self):
     self.assertEqual(self.ant.get_ability_triggeredBy(), constants.SELF)
   
-  # test that ability prints correct message if ant is still alive
-  def test_ability_print_message(self):
-    with patch('sys.stdout', new = StringIO()) as fake_out:
-      self.ant.run_ability(self.friends)
-      self.assertEqual(fake_out.getvalue(), constants.ERROR_STILL_ALIVE + "\n")
-  
-  # test that ability prints correct message if all friends are dead
+  # test that ant ability does not work on dead pets
   def test_ability_print_message_all_dead(self):
     for friend in self.friends:
       friend.subtract_health(friend.get_health())
-    with patch('sys.stdout', new = StringIO()) as fake_out:
-      self.ant.run_ability(self.friends)
-      self.assertEqual(fake_out.getvalue(), constants.ERROR_ALL_FRIENDS_DEAD + "\n")
+
+    copy_of_dead_friends = deepcopy(self.friends)
+    self.ant.run_ability(self.friends)
+    for friend, friend_copy in zip(self.friends, copy_of_dead_friends):
+      self.assertEqual(friend.get_health(), friend_copy.get_health())
+      self.assertEqual(friend.get_attack(), friend_copy.get_attack())
 
   # test that ability does not affect other pets if still alive
   def test_run_ability_no_effect(self):

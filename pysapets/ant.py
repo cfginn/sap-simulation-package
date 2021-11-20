@@ -1,6 +1,7 @@
 from pysapets.animal import Animal
 import pysapets.constants as constants
 import random
+import logging
 
 
 # define ant class to inherit from animal class
@@ -17,7 +18,7 @@ class Ant(Animal):
     # lvl 3: +6 attack, +3 health
     def _run_effect(self, friends):
       if all(friend.dead for friend in friends):
-        print("{}".format(constants.ERROR_ALL_FRIENDS_DEAD))
+        logging.error("{}: {}".format("Ant", constants.ERROR_ALL_FRIENDS_DEAD))
 
       elif self.dead:
         # select random friend not dead
@@ -30,7 +31,7 @@ class Ant(Animal):
         friend.add_health(health_buff)
 
       else:
-        print("{}".format(constants.ERROR_STILL_ALIVE))
+        logging.error("{}: {}".format("Ant", constants.ERROR_STILL_ALIVE))
     
     # create ability
     self.ability = Animal.Ability(self, constants.FAINT, constants.SELF, _run_effect)
