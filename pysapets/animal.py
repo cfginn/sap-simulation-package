@@ -113,9 +113,9 @@ class Animal:
     self.status = None
 
   # run ability
-  def run_ability(self, *args):
+  def run_ability(self, **kwargs):
     if self.ability:
-      self.ability.effectFunction(self, *args)
+      self.ability.effectFunction(self, **kwargs)
   
   # get ability trigger
   def get_ability_trigger(self):

@@ -14,7 +14,8 @@ class Cricket(Animal):
     # lvl 1: Faint: Summon a 1/1 Cricket
     # lvl 2: Faint: Summon a 2/2 Cricket
     # lvl 3: Faint: Summon a 3/3 Cricket
-    def _run_effect(self, friends):
+    def _run_effect(self, **kwargs):
+      friends = kwargs['friends']
       # if cricket still alive do nothing
       if not self.dead:
         logging.error("{}: {}".format("Cricket", constants.ERROR_STILL_ALIVE))

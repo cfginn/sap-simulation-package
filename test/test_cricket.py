@@ -52,7 +52,7 @@ class CricketTest(unittest.TestCase):
   # TODO add relevant tests for cricket ability
   # test that cricket ability wont run if cricket is alive
   def test_run_ability_cricket_alive(self):
-    self.cricket.run_ability(self.friends)
+    self.cricket.run_ability(friends = self.friends)
 
     noZombieCricket = True
     for friend in self.friends:
@@ -65,7 +65,7 @@ class CricketTest(unittest.TestCase):
   def test_run_ability(self):
     copyOfFriends = deepcopy(self.friends)
     self.cricket.subtract_health(self.cricket.get_health())
-    self.cricket.run_ability(self.friends)
+    self.cricket.run_ability(friends = self.friends)
     for friend, friendCopy in zip(self.friends, copyOfFriends):
       if friendCopy.get_type() == constants.CRICKET:
         self.assertEqual(friend.get_type(), constants.ZOMBIE_CRICKET)
@@ -73,7 +73,7 @@ class CricketTest(unittest.TestCase):
   def test_run_ability_level_1(self):
     copyOfFriends = deepcopy(self.friends)
     self.cricket.subtract_health(self.cricket.get_health())
-    self.cricket.run_ability(self.friends)
+    self.cricket.run_ability(friends = self.friends)
     for friend, friendCopy in zip(self.friends, copyOfFriends):
       if friendCopy.get_type() == constants.CRICKET:
         self.assertEqual(friend.health, 1)
@@ -83,7 +83,7 @@ class CricketTest(unittest.TestCase):
     copyOfFriends = deepcopy(self.friends)
     self.cricket.level = 2
     self.cricket.subtract_health(self.cricket.get_health())
-    self.cricket.run_ability(self.friends)
+    self.cricket.run_ability(friends = self.friends)
     for friend, friendCopy in zip(self.friends, copyOfFriends):
       if friendCopy.get_type() == constants.CRICKET:
         self.assertEqual(friend.health, 2)
@@ -93,7 +93,7 @@ class CricketTest(unittest.TestCase):
     copyOfFriends = deepcopy(self.friends)
     self.cricket.level = 3
     self.cricket.subtract_health(self.cricket.get_health())
-    self.cricket.run_ability(self.friends)
+    self.cricket.run_ability(friends = self.friends)
     for friend, friendCopy in zip(self.friends, copyOfFriends):
       if friendCopy.get_type() == constants.CRICKET:
         self.assertEqual(friend.health, 3)

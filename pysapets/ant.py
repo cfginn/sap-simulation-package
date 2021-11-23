@@ -16,7 +16,8 @@ class Ant(Animal):
     # lvl 1: +2 attack, +1 health
     # lvl 2: +4 attack, +2 health
     # lvl 3: +6 attack, +3 health
-    def _run_effect(self, friends):
+    def _run_effect(self, **kwargs):
+      friends = kwargs['friends']
       if all(friend.dead for friend in friends):
         logging.error("{}: {}".format("Ant", constants.ERROR_ALL_FRIENDS_DEAD))
 

@@ -57,7 +57,7 @@ class AntTest(unittest.TestCase):
       friend.subtract_health(friend.get_health())
 
     copy_of_dead_friends = deepcopy(self.friends)
-    self.ant.run_ability(self.friends)
+    self.ant.run_ability(friends = self.friends)
     for friend, friend_copy in zip(self.friends, copy_of_dead_friends):
       self.assertEqual(friend.get_health(), friend_copy.get_health())
       self.assertEqual(friend.get_attack(), friend_copy.get_attack())
@@ -65,7 +65,7 @@ class AntTest(unittest.TestCase):
   # test that ability does not affect other pets if still alive
   def test_run_ability_no_effect(self):
     copy_of_friends = self.friends.copy()
-    self.ant.run_ability(self.friends)
+    self.ant.run_ability(friends = self.friends)
     for friend, friend_copy in zip(self.friends, copy_of_friends):
       self.assertEqual(friend.get_health(), friend_copy.get_health())
       self.assertEqual(friend.get_attack(), friend_copy.get_attack())
@@ -74,7 +74,7 @@ class AntTest(unittest.TestCase):
   def test_run_ability_self(self):
     init_attack = self.ant.get_attack()
     self.ant.subtract_health(self.ant.get_health())
-    self.ant.run_ability(self.friends)
+    self.ant.run_ability(friends = self.friends)
     self.assertEqual(self.ant.get_health(), 0)
     self.assertEqual(self.ant.get_attack(), init_attack)
 
@@ -84,7 +84,7 @@ class AntTest(unittest.TestCase):
     only_one_buffed = True
     copy_of_friends = deepcopy(self.friends)
     self.ant.subtract_health(self.ant.get_health())
-    self.ant.run_ability(self.friends)
+    self.ant.run_ability(friends = self.friends)
     for friend, friend_copy in zip(self.friends, copy_of_friends):
       if friend.get_health() > friend_copy.get_health() and friend.get_attack() > friend_copy.get_attack():
         if animal_buffed:
@@ -100,7 +100,7 @@ class AntTest(unittest.TestCase):
     copy_of_friends_level_1 = deepcopy(self.friends)
     
     self.ant.subtract_health(self.ant.get_health())
-    self.ant.run_ability(self.friends)
+    self.ant.run_ability(friends = self.friends)
 
     for friend, friend_copy in zip(self.friends, copy_of_friends_level_1):
       if friend.get_health() == friend_copy.get_health() + 1 and friend.get_attack() == friend_copy.get_attack() + 2:
@@ -116,7 +116,7 @@ class AntTest(unittest.TestCase):
     copy_of_friends_level_2 = deepcopy(self.friends)
 
     self.ant.subtract_health(self.ant.get_health())
-    self.ant.run_ability(self.friends)
+    self.ant.run_ability(friends = self.friends)
 
     for friend, friend_copy in zip(self.friends, copy_of_friends_level_2):
       if friend.get_health() == friend_copy.get_health() + 1 and friend.get_attack() == friend_copy.get_attack() + 2:
@@ -131,7 +131,7 @@ class AntTest(unittest.TestCase):
     copy_of_friends_level_3 = deepcopy(self.friends)
 
     self.ant.subtract_health(self.ant.get_health())
-    self.ant.run_ability(self.friends)
+    self.ant.run_ability(friends = self.friends)
 
     for friend, friend_copy in zip(self.friends, copy_of_friends_level_3):
       if friend.get_health() == friend_copy.get_health() + 1 and friend.get_attack() == friend_copy.get_attack() + 2:
