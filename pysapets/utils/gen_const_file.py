@@ -7,30 +7,30 @@ with open("./../constants.py", "w") as const_file:
   # get the unique list of animal names
   for animal, obj in json_data["pets"].items():
     if "StandardPack" in obj["packs"] and obj["tier"] != "Summoned":
-      const_file.write("{} = \"{}\"\n".format(dash_to_snake_ignore_first(animal), animal))
+      const_file.write("{} = \"{}\"\n".format(dash_to_snake_ignore_first(animal), obj["name"]))
   
   # seperate the summoned tier pets
   const_file.write("\n# summoned only pets\n")
 
   for animal, obj in json_data["pets"].items():
     if obj["tier"] == "Summoned":
-      const_file.write("{} = \"{}\"\n".format(dash_to_snake_ignore_first(animal), animal))
+      const_file.write("{} = \"{}\"\n".format(dash_to_snake_ignore_first(animal), obj["name"]))
 
   # get the animal names specific to the expansion pack 
   const_file.write("\n# expansion pets\n")
   for animal, obj in json_data["pets"].items():
     if "StandardPack" not in obj["packs"]:
-      const_file.write("{} = \"{}\"\n".format(dash_to_snake_ignore_first(animal), animal))
+      const_file.write("{} = \"{}\"\n".format(dash_to_snake_ignore_first(animal), obj["name"]))
       
   # get the unique foods names
   const_file.write("\n# foods\n")
   for foods, obj in json_data["foods"].items():
-    const_file.write("{} = \"{}\"\n".format(dash_to_snake_ignore_first(foods), foods))
+    const_file.write("{} = \"{}\"\n".format(dash_to_snake_ignore_first(foods), obj["name"]))
     
   # get the unique statuses
   const_file.write("\n# statuses\n")
   for status, obj in json_data["statuses"].items():
-    const_file.write("{} = \"{}\"\n".format(dash_to_snake_ignore_first(status), status))
+    const_file.write("{} = \"{}\"\n".format(dash_to_snake_ignore_first(status), obj["name"]))
   
   # get the unique ability triggers
   triggers = []
