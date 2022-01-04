@@ -24,7 +24,7 @@ class HorseTest(unittest.TestCase):
   
   # test that horse starts with base attack of 1 
   def test_get_attack(self):
-    self.assertEqual(self.horse.get_attack(), 1)
+    self.assertEqual(self.horse.get_attack(), 2)
   
   # test that initializing horse with additional health increases health
   def test_init_add_health(self):
@@ -34,13 +34,13 @@ class HorseTest(unittest.TestCase):
   # test that initializing an horse with additional attack increases attack
   def test_init_add_attack(self):
     newHorse = Horse(addAttack = 3)
-    self.assertEqual(newHorse.get_attack(), 1 + 3)
+    self.assertEqual(newHorse.get_attack(), 2 + 3)
   
   # test that initializing horse with additional health and attack increases health and attack
   def test_init_add_health_attack(self):
     newHorse = Horse(addHealth = 3, addAttack = 3)
     self.assertEqual(newHorse.get_health(), 1 + 3)
-    self.assertEqual(newHorse.get_attack(), 1 + 3)
+    self.assertEqual(newHorse.get_attack(), 2 + 3)
   
   # test that ability can not be run if horse is dead
   def test_run_ability_dead(self):

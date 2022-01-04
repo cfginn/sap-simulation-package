@@ -18,6 +18,12 @@ class Ant(Animal):
     # lvl 3: +6 attack, +3 health
     def _run_effect(self, **kwargs):
       friends = kwargs['friends']
+
+      if 'teamName' in kwargs:
+        teamName = kwargs['teamName']
+      else:
+        teamName = "None"
+
       if all(friend.dead for friend in friends):
         logging.error("{}: {}".format("Ant", constants.ERROR_ALL_FRIENDS_DEAD))
 
@@ -30,6 +36,13 @@ class Ant(Animal):
         # apply buff
         friend.add_attack(attack_buff)
         friend.add_health(health_buff)
+
+        index_of_friend = friends.index(friend)
+        type_of_friend = friend.get_type()
+
+        print("{}-{}-{} received ant buff of {} attack and {} health".format(teamName, index_of_friend, type_of_friend, attack_buff, health_buff))
+
+        
 
       else:
         logging.error("{}: {}".format("Ant", constants.ERROR_STILL_ALIVE))

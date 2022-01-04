@@ -40,7 +40,7 @@ class AnimalTest(unittest.TestCase):
 
   # test print(animal)
   def test_animal_print(self):
-    self.assertEqual(str(self.animal), 'Animal: level 1, attack 2, health 2, exp 0')
+    self.assertEqual(str(self.animal), 'Animal(A: 2, H: 2, L: 1, E: 0)')
 
   # test add_experience
   def test_animal_add_experience(self):

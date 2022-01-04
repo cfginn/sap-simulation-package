@@ -42,8 +42,12 @@ class Animal:
   
   # define __str__
   def __str__(self):
-    return "{}: level {}, attack {}, health {}, exp {}".format(self.animalType, self.level, self.attack, self.health, self.experience)
-    
+    # return "{}: level {}, attack {}, health {}, exp {}".format(self.animalType, self.level, self.attack, self.health, self.experience)
+    return "{}(A: {}, H: {}, L: {}, E: {})".format(self.animalType, self.attack, self.health, self.level, self.experience)
+  
+  def __repr__(self):
+    # return "{}: level {}, attack {}, health {}, exp {}".format(self.animalType, self.level, self.attack, self.health, self.experience)
+    return "{}(A: {}, H: {}, L: {}, E: {})".format(self.animalType, self.attack, self.health, self.level, self.experience)
   # get the health of the animal
   def get_health(self):
     return self.health

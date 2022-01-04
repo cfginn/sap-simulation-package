@@ -6,7 +6,7 @@ import logging
 
 class Horse(Animal):
   # base health and attack values
-  BASE_ATTACK = 1 
+  BASE_ATTACK = 2 
   BASE_HEALTH = 1 
   
   def __init__(self, addAttack = 0, addHealth = 0):

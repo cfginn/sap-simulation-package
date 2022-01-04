@@ -11,26 +11,37 @@ class Battle():
     self.result = 0
 
   def attack(self):
+    self.print_teams()
+
     attackerA = self.teamA[-1]
     attackerB = self.teamB[-1]
+
+    index_of_A = self.teamA.index(attackerA)
+    index_of_B = self.teamB.index(attackerB)
+
+    type_of_A = attackerA.get_type()
+    type_of_B = attackerB.get_type()
 
     attackerA.subtract_health(attackerB.attack)
     attackerB.subtract_health(attackerA.attack)
 
-    _check_for_abilities(self.teamA, self.teamB)
-    _check_for_abilities(self.teamB, self.teamA)
+    print('A-{}-{} took {} damage!'.format(index_of_A, type_of_A, attackerB.attack))
+    print('B-{}-{} took {} damage!'.format(index_of_B, type_of_B, attackerA.attack))
+
+    _check_for_abilities(self.teamA, self.teamB, "A", "B")
+    _check_for_abilities(self.teamB, self.teamA, "B", "A")
 
   def start(self):
-    _check_for_start_of_battle(self.teamA, self.teamB)
-    _check_for_start_of_battle(self.teamB, self.teamA)
+    _check_for_start_of_battle(self.teamA, self.teamB, "A", "B")
+    _check_for_start_of_battle(self.teamB, self.teamA, "B", "A")
 
     for animal in self.teamA:
       if animal.is_dead():
-        _handle_faint(animal, self.teamA, self.teamB)
+        _handle_faint(animal, self.teamA, self.teamB, "A", "B")
 
     for animal in self.teamB:
       if animal.is_dead():
-        _handle_faint(animal, self.teamB, self.teamA)
+        _handle_faint(animal, self.teamB, self.teamA, "B", "A")
 
     while len(self.teamA) > 0 and len(self.teamB) > 0:
       self.attack()
@@ -42,28 +53,36 @@ class Battle():
       self.result += 1
     
     return self.result
+  
+  def __str__(self):
+    return f'Team A: {self.teamA}\nTeam B: {self.teamB}'
 
-def _check_for_abilities(friends, enemies):
+  def print_teams(self):
+    print(self)
+
+# helper functions
+
+def _check_for_abilities(friends, enemies, teamName, otherTeamName):
   attacker = friends[-1]
 
   if attacker.is_dead():
-    _handle_faint(attacker, friends, enemies)
+    _handle_faint(attacker, friends, enemies, teamName, otherTeamName)
   
   for animal in friends:
     if animal.is_dead():
-      _handle_faint(animal, friends, enemies)
+      _handle_faint(animal, friends, enemies, teamName, otherTeamName)
     
 
-def _check_for_start_of_battle(friends, enemies):
+def _check_for_start_of_battle(friends, enemies, teamName, otherTeamName):
   for animal in friends:
     if animal.get_ability_trigger() == constants.START_OF_BATTLE:
-      animal.run_ability(friends = friends, enemies = enemies)
+      animal.run_ability(friends = friends, enemies = enemies, teamName = teamName, otherTeamName = otherTeamName)
 
-def _handle_faint(dead_animal, friends, enemies):
+def _handle_faint(dead_animal, friends, enemies, teamName, otherTeamName):
   indexOfDeadAnimal = friends.index(dead_animal)
 
   if dead_animal.get_ability_trigger() == constants.FAINT and dead_animal.get_ability_triggeredBy() == constants.SELF:
-    dead_animal.run_ability(friends = friends, enemies = enemies)
+    dead_animal.run_ability(friends = friends, enemies = enemies, teamName = teamName, otherTeamName = otherTeamName)
 
     # if the animal is not dead, then new animal was summoned
     if friends[indexOfDeadAnimal].is_dead():
@@ -71,7 +90,7 @@ def _handle_faint(dead_animal, friends, enemies):
     else:
       for animal in friends:
         if animal.get_ability_trigger() == constants.SUMMONED and animal.get_ability_triggeredBy() == constants.EACH_FRIEND:
-          animal.run_ability(friends = friends, enemies = enemies, summoned = friends[-1])
+          animal.run_ability(friends = friends, enemies = enemies, summoned = friends[-1], teamName = teamName, otherTeamName = otherTeamName)
   
   else:
     friends.pop(indexOfDeadAnimal)

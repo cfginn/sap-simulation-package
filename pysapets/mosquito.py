@@ -15,9 +15,10 @@ class Mosquito(Animal):
     def _run_effect(self, **kwargs):
       enemies = kwargs['enemies']
       # choose a random enemy
-      enemy = random.choice(enemies)
+      chosen_enemies = random.sample(enemies, k = self.level)
       # deal damage to the enemy
-      enemy.subtract_health(self.level) 
+      for enemy in chosen_enemies:
+        enemy.subtract_health(1) 
     # create ability
     self.ability = Animal.Ability(self, constants.START_OF_BATTLE, constants.PLAYER, _run_effect)
 

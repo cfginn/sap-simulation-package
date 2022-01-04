@@ -82,12 +82,14 @@ class MosquitoTest(unittest.TestCase):
     self.mosquito.level = 2
     self.mosquito.run_ability(enemies = self.enemies)
 
-    test = False
+    test = [False, False]
+    i = 0
     for enemy, enemyCopy in zip(self.enemies, copyEnemies):
-      if enemy.get_health() == enemyCopy.get_health() - 2:
-        test = True
+      if enemy.get_health() == enemyCopy.get_health() - 1:
+        test[i] = True
+        i += 1
     
-    self.assertTrue(test)
+    self.assertTrue(test[0] and test[1])
 
   
   def test_run_ability_level_3(self):
@@ -95,11 +97,13 @@ class MosquitoTest(unittest.TestCase):
     self.mosquito.level = 3
     self.mosquito.run_ability(enemies = self.enemies)
 
-    test = False
+    test = [False, False, False]
+    i = 0
     for enemy, enemyCopy in zip(self.enemies, copyEnemies):
-      if enemy.get_health() == enemyCopy.get_health() - 3:
-        test = True
-
-    self.assertTrue(test)
+      if enemy.get_health() == enemyCopy.get_health() - 1:
+        test[i] = True
+        i += 1
+    
+    self.assertTrue(test[0] and test[1] and test[2])
     
       
