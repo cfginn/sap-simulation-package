@@ -25,7 +25,8 @@ class Ant(Animal):
         teamName = "None"
 
       if all(friend.dead for friend in friends):
-        logging.error("{}: {}".format("Ant", constants.ERROR_ALL_FRIENDS_DEAD))
+        # logging.error("{}: {}".format("Ant", constants.ERROR_ALL_FRIENDS_DEAD))
+        pass
 
       elif self.dead:
         # select random friend not dead

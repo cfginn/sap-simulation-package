@@ -32,6 +32,8 @@ class Battle():
     _check_for_abilities(self.teamB, self.teamA, "B", "A")
 
   def start(self):
+    self.print_teams()
+
     _check_for_start_of_battle(self.teamA, self.teamB, "A", "B")
     _check_for_start_of_battle(self.teamB, self.teamA, "B", "A")
 
@@ -51,6 +53,8 @@ class Battle():
     
     if len(self.teamB) == 0:
       self.result += 1
+
+    self.print_result()
     
     return self.result
   
@@ -58,7 +62,17 @@ class Battle():
     return f'Team A: {self.teamA}\nTeam B: {self.teamB}'
 
   def print_teams(self):
+    print("******************************")
     print(self)
+    print("******************************")
+
+  def print_result(self):
+    if self.result == 0:
+      print("It's a tie!")
+    elif self.result == 1:
+      print("Team A wins!")
+    elif self.result == -1:
+      print("Team B wins!")
 
 # helper functions
 
@@ -81,12 +95,14 @@ def _check_for_start_of_battle(friends, enemies, teamName, otherTeamName):
 def _handle_faint(dead_animal, friends, enemies, teamName, otherTeamName):
   indexOfDeadAnimal = friends.index(dead_animal)
 
+  print("{}-{}-{} fainted!".format(teamName, indexOfDeadAnimal, dead_animal.get_type()))
+
   if dead_animal.get_ability_trigger() == constants.FAINT and dead_animal.get_ability_triggeredBy() == constants.SELF:
     dead_animal.run_ability(friends = friends, enemies = enemies, teamName = teamName, otherTeamName = otherTeamName)
 
     # if the animal is not dead, then new animal was summoned
     if friends[indexOfDeadAnimal].is_dead():
-      friends.pop()
+      friends.pop(indexOfDeadAnimal)
     else:
       for animal in friends:
         if animal.get_ability_trigger() == constants.SUMMONED and animal.get_ability_triggeredBy() == constants.EACH_FRIEND:

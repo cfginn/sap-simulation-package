@@ -14,11 +14,27 @@ class Mosquito(Animal):
     # lvl 3: Start of battle: Deal 3 damage to a random enemy
     def _run_effect(self, **kwargs):
       enemies = kwargs['enemies']
+      friends = kwargs['friends']
+      if 'teamName' in kwargs:
+        teamName = kwargs['teamName']
+      else:
+        teamName = "None"
+      if 'otherTeamName' in kwargs:
+        otherTeamName = kwargs['otherTeamName']
+      else:
+        otherTeamName = "None"
+      
+      index_of_self = friends.index(self)
+
+
       # choose a random enemy
       chosen_enemies = random.sample(enemies, k = self.level)
       # deal damage to the enemy
       for enemy in chosen_enemies:
-        enemy.subtract_health(1) 
+        index_of_enemy = enemies.index(enemy)
+        enemy.subtract_health(1)
+        print("{}-{}-{} has attacked {}-{}-{} for 1 damage".format(teamName, index_of_self, self.get_type(), otherTeamName, index_of_enemy, enemy.get_type()))
+        
     # create ability
     self.ability = Animal.Ability(self, constants.START_OF_BATTLE, constants.PLAYER, _run_effect)
 

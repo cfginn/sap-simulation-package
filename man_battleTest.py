@@ -1,5 +1,5 @@
 from pysapets import *
 
-battleTest = Battle([Ant(), Ant(), Ant()], [Ant(), Ant(), Ant()])
+battleTest = Battle([Horse(), Ant(), Cricket()], [Mosquito(), Ant(), Ant()])
 
 battleTest.start()

@@ -21,10 +21,19 @@ class Cricket(Animal):
         logging.error("{}: {}".format("Cricket", constants.ERROR_STILL_ALIVE))
         return
 
+      if 'teamName' in kwargs:
+        teamName = kwargs['teamName']
+      else:
+        teamName = "None"
+
+      index_of_self = friends.index(self)
+
       zombieCricket = ZombieCricket(self)
 
       # replace cricket with zombie in friends in place
       friends[:] = [zombieCricket if friend == self else friend for friend in friends]
+
+      print("{}-{}-{} has been replaced with a zombie cricket".format(teamName, index_of_self, self.get_type()))
  
     # create ability
     self.ability = Animal.Ability(self, constants.FAINT, constants.SELF, _run_effect)

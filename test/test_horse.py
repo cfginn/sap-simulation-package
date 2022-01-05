@@ -11,8 +11,8 @@ class HorseTest(unittest.TestCase):
 
   def setUp(self):
     self.horse = Horse()
-    self.friends = [self.horse, Animal(2, 2), Animal(2, 2), Animal(2, 2), Animal(2, 2)]
     self.summoned = Animal(2, 2)
+    self.friends = [self.horse, self.summoned, Animal(2, 2), Animal(2, 2), Animal(2, 2)]
   
   # test that get_type returns the correct type
   def test_get_type(self):
@@ -46,7 +46,7 @@ class HorseTest(unittest.TestCase):
   def test_run_ability_dead(self):
     copyOfSummoned = deepcopy(self.summoned)
     self.horse.subtract_health(self.horse.get_health())
-    self.horse.run_ability(summoned = self.summoned)
+    self.horse.run_ability(summoned = self.summoned, friends = self.friends)
 
     self.assertEqual(copyOfSummoned.get_attack(), self.summoned.get_attack())
   
@@ -60,21 +60,21 @@ class HorseTest(unittest.TestCase):
 
   def test_run_ability_level_1(self):
     copyOfSummoned = deepcopy(self.summoned)
-    self.horse.run_ability(summoned = self.summoned)
+    self.horse.run_ability(summoned = self.summoned, friends = self.friends)
 
     self.assertEqual(self.summoned.get_attack(), copyOfSummoned.get_attack() + 1)
 
   def test_run_ability_level_2(self):
     copyOfSummoned = deepcopy(self.summoned)
     self.horse.level = 2
-    self.horse.run_ability(summoned = self.summoned)
+    self.horse.run_ability(summoned = self.summoned, friends = self.friends)
 
     self.assertEqual(self.summoned.get_attack(), copyOfSummoned.get_attack() + 2)
   
   def test_run_ability_level_3(self):
     copyOfSummoned = deepcopy(self.summoned)
     self.horse.level = 3
-    self.horse.run_ability(summoned = self.summoned)
+    self.horse.run_ability(summoned = self.summoned, friends = self.friends)
 
     self.assertEqual(self.summoned.get_attack(), copyOfSummoned.get_attack() + 3)
     

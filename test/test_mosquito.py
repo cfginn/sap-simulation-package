@@ -11,6 +11,7 @@ class MosquitoTest(unittest.TestCase):
 
   def setUp(self):
     self.mosquito = Mosquito()
+    self.friends = [self.mosquito]
     self.enemies = [Animal(3, 3), Animal(3, 3), Animal(3, 3), Animal(3, 3), Animal(3, 3)]
   
   # test that get_type returns the correct type
@@ -53,7 +54,7 @@ class MosquitoTest(unittest.TestCase):
   # test that mosquito only hurts one enemy
   def test_run_ability(self):
     copyEnemies = deepcopy(self.enemies)
-    self.mosquito.run_ability(enemies = self.enemies)
+    self.mosquito.run_ability(enemies = self.enemies, friends = self.friends)
     
     enemyHurtFlag = False
     onlyOneEnemyHurtFlag = True
@@ -68,7 +69,7 @@ class MosquitoTest(unittest.TestCase):
 
   def test_run_ability_level_1(self):
     copyEnemies = deepcopy(self.enemies)
-    self.mosquito.run_ability(enemies = self.enemies)
+    self.mosquito.run_ability(enemies = self.enemies, friends = self.friends)
 
     test = False
     for enemy, enemyCopy in zip(self.enemies, copyEnemies):
@@ -80,7 +81,7 @@ class MosquitoTest(unittest.TestCase):
   def test_run_ability_level_2(self):
     copyEnemies = deepcopy(self.enemies)
     self.mosquito.level = 2
-    self.mosquito.run_ability(enemies = self.enemies)
+    self.mosquito.run_ability(enemies = self.enemies, friends = self.friends)
 
     test = [False, False]
     i = 0
@@ -95,7 +96,7 @@ class MosquitoTest(unittest.TestCase):
   def test_run_ability_level_3(self):
     copyEnemies = deepcopy(self.enemies)
     self.mosquito.level = 3
-    self.mosquito.run_ability(enemies = self.enemies)
+    self.mosquito.run_ability(enemies = self.enemies, friends = self.friends)
 
     test = [False, False, False]
     i = 0
